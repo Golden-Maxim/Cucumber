@@ -44,6 +44,7 @@ public class HotlineRun {
                 System.out.println("The type of product equal Телевизор");
             }
         }
+        DriverManager.killDriver();
 
     }
 
@@ -85,6 +86,8 @@ public class HotlineRun {
             System.out.println("Price from: " + i + " page" );
             checkPrice(price);
         }
+
+        DriverManager.killDriver();
 
     }
 

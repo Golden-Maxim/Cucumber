@@ -19,4 +19,9 @@ public class DriverManager {
         }
         return driver;
     }
+
+    public static WebDriver killDriver(){
+        driver.close();
+        return driver;
+    }
 }

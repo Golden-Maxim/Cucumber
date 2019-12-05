@@ -10,7 +10,8 @@ public class MyMethods {
             Integer priceValue = Integer.parseInt(priceStr.replace(" ", "").replace("грн", ""));
             if(priceValue > 10000) {
                 System.out.println(priceValue);
-            }else System.out.println("Page does not have price more than 10000");
+            }
         }
+        System.out.println("Pages does not have price more than 10000");
     }
 }
