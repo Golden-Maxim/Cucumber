@@ -20,8 +20,13 @@ public class DriverManager {
         return driver;
     }
 
-    public static WebDriver killDriver(){
+    public static void killDriver(){
         driver.close();
-        return driver;
+        if (driver != null){
+            driver = null;
+        }
+
     }
+
+
 }

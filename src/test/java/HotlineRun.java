@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 import static core.MyMethods.checkPrice;
+import PageObject.MainPage;
 
 public class HotlineRun {
 
@@ -17,17 +18,21 @@ public class HotlineRun {
     public  void checkTypeOfProduct(){
         PageObject.navigateTo("https://hotline.ua/");
 
-        WebElement alert = DriverManager.driver.findElement(By.xpath("/html/body/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1]"));
-        alert.click();
+       // WebElement alert = DriverManager.driver.findElement(By.xpath("/html/body/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1]"));
+        //alert.click();
+        MainPage mainPage = new MainPage();
+        mainPage.closePopUpWindow();
 
         DriverManager.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
-        WebElement input = DriverManager.driver.findElement(By.xpath("//*[@id=\"searchbox\"]"));
-        input.click();
-        input.sendKeys("телевизор");
+       // WebElement input = DriverManager.driver.findElement(By.xpath("//*[@id=\"searchbox\"]"));
+        //input.click();
+        //input.sendKeys("телевизор");
 
-        WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
-        searchButton.click();
+        //WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
+        //searchButton.click();
+        //PageObject.Button("//*[@id=\"doSearch\"]");
+        mainPage.EnterTextToSearchField();
 
         WebDriverWait wait = new WebDriverWait(DriverManager.driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a")));
