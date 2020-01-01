@@ -14,4 +14,8 @@ public class MyMethods {
         }
         System.out.println("Pages does not have price more than 10000");
     }
+
+    public static void checkDescriptionProduct(){
+
+    }
 }

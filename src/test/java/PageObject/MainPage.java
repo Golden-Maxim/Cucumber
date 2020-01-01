@@ -1,5 +1,6 @@
 package PageObject;
 
+
 import core.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,13 +17,13 @@ public class MainPage {
         return new MainPage();
     }
 
-    public MainPage EnterTextToSearchField(){
+    public ItemList searchItemInTheSearchField(){
         WebElement searchInput = DriverManager.getDriver().findElement(searchField);
         searchInput.click();
         searchInput.sendKeys("телевизор");
         WebElement searchButtonMainPage = DriverManager.getDriver().findElement(searchButton);
         searchButtonMainPage.click();
-        return new MainPage();
+        return new ItemList();
     }
 
 }

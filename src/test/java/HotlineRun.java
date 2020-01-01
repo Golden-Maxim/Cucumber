@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 import static core.MyMethods.checkPrice;
-import PageObject.MainPage;
+import PageObject.*;
 
 public class HotlineRun {
 
@@ -21,6 +21,9 @@ public class HotlineRun {
        // WebElement alert = DriverManager.driver.findElement(By.xpath("/html/body/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1]"));
         //alert.click();
         MainPage mainPage = new MainPage();
+        ItemList itemList = new ItemList();
+        PageOfProduct pageOfProduct = new PageOfProduct();
+
         mainPage.closePopUpWindow();
 
         DriverManager.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -32,23 +35,34 @@ public class HotlineRun {
         //WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
         //searchButton.click();
         //PageObject.Button("//*[@id=\"doSearch\"]");
-        mainPage.EnterTextToSearchField();
+        mainPage.searchItemInTheSearchField();
 
         WebDriverWait wait = new WebDriverWait(DriverManager.driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a")));
 
-        WebElement list = DriverManager.driver.findElement(By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a"));
-        list.click();
+
+      //  WebElement list = DriverManager.driver.findElement(By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a"));
+       // list.click();
+
+
+        itemList.goToPageOfProduct();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"page-product\"]/div[3]/div/div[2]/div/div[2]/div")));
 
-        WebElement listofparameters = DriverManager.driver.findElement(By.xpath("//ul[contains(@class,'breadcrumbs')]"));
+      /*  WebElement listofparameters = DriverManager.driver.findElement(By.xpath("//ul[contains(@class,'breadcrumbs')]"));
+
         String str = listofparameters.getText();
+        System.out.println(str);
+
         String temp[] = str.trim().split("\\s+");
         for (int i = 0;i < temp.length;i++){
             if(temp[i].contains("Телевизоры")){
                 System.out.println("The type of product equal Телевизор");
             }
-        }
+        }*/
+
+      pageOfProduct.checkDescription();
+
         DriverManager.killDriver();
 
     }
@@ -57,27 +71,35 @@ public class HotlineRun {
     public void sortPrice()
     {
         PageObject.navigateTo("https://hotline.ua/");
-        WebElement alert = DriverManager.driver.findElement(By.xpath("/html/body/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1]"));
-        alert.click();
+      //  WebElement alert = DriverManager.driver.findElement(By.xpath("/html/body/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1]"));
+        //alert.click();
+        MainPage mainPage = new MainPage();
+        ItemList itemList = new ItemList();
+        PageOfProduct pageOfProduct = new PageOfProduct();
+
+        mainPage.closePopUpWindow();
 
         DriverManager.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        WebElement input = DriverManager.driver.findElement(By.xpath("//*[@id=\"searchbox\"]"));
-        input.click();
-        input.sendKeys("телевизор");
 
-        WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
-        searchButton.click();
+        //WebElement input = DriverManager.driver.findElement(By.xpath("//*[@id=\"searchbox\"]"));
+        //input.click();
+        //input.sendKeys("телевизор");
+        mainPage.searchItemInTheSearchField();
+
+        //WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
+        //searchButton.click();
 
         WebDriverWait wait = new WebDriverWait(DriverManager.driver, 5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class ,'price-md')]")));
 
-        WebElement filter = DriverManager.driver.findElement(By.xpath("//*[@id=\"page-search\"]/div[2]/div/div[1]/div[2]/ul/li/select"));
-        filter.click();
+       // WebElement filter = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'sorting')]//select"));
+        //filter.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"page-search\"]/div[2]/div/div[1]/div[2]/ul/li/select/option[2]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]")));
 
-        WebElement chooseByPrice = DriverManager.driver.findElement(By.xpath("//*[@id=\"page-search\"]/div[2]/div/div[1]/div[2]/ul/li/select/option[2]"));
-        chooseByPrice.click();
+        //WebElement chooseByPrice = DriverManager.driver.findElement(By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]"));
+            //chooseByPrice.click();
+        itemList.sortByPrice();
 
 
         WebElement nextPage;
