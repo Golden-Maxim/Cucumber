@@ -6,12 +6,12 @@ import org.openqa.selenium.WebElement;
 
 public class ItemList {
 
-    public By firstProductOflist = By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a");
-    public By filter = By.xpath("//div[contains(@class,'sorting')]//select");
-    public By sortPrice = By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]");
+    private By firstProductOflist = By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a");
+    private By filter = By.xpath("//div[contains(@class,'sorting')]//select");
+    private By sortPrice = By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]");
 
 
-    public PageOfProduct goToPageOfProduct(){
+    private PageOfProduct goToPageOfProduct(){
         WebElement product = DriverManager.getDriver().findElement(firstProductOflist);
         product.click();
         return new PageOfProduct();
