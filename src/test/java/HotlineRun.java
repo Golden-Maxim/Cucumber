@@ -1,12 +1,18 @@
 import core.DriverManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.security.Key;
+import java.sql.Driver;
 import java.util.concurrent.TimeUnit;
 
 import static core.MyMethods.checkPrice;
@@ -28,40 +34,16 @@ public class HotlineRun {
 
         DriverManager.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
-       // WebElement input = DriverManager.driver.findElement(By.xpath("//*[@id=\"searchbox\"]"));
-        //input.click();
-        //input.sendKeys("телевизор");
-
-        //WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
-        //searchButton.click();
-        //PageObject.Button("//*[@id=\"doSearch\"]");
         mainPage.searchItemInTheSearchField();
 
         WebDriverWait wait = new WebDriverWait(DriverManager.driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a")));
 
-
-      //  WebElement list = DriverManager.driver.findElement(By.xpath("//ul[contains(@class, 'products-list')]/li[1]/div/p/a"));
-       // list.click();
-
-
         itemList.goToPageOfProduct();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"page-product\"]/div[3]/div/div[2]/div/div[2]/div")));
 
-      /*  WebElement listofparameters = DriverManager.driver.findElement(By.xpath("//ul[contains(@class,'breadcrumbs')]"));
-
-        String str = listofparameters.getText();
-        System.out.println(str);
-
-        String temp[] = str.trim().split("\\s+");
-        for (int i = 0;i < temp.length;i++){
-            if(temp[i].contains("Телевизоры")){
-                System.out.println("The type of product equal Телевизор");
-            }
-        }*/
-
-      pageOfProduct.checkDescription();
+        pageOfProduct.checkDescription();
 
         DriverManager.killDriver();
 
@@ -71,8 +53,7 @@ public class HotlineRun {
     public void sortPrice()
     {
         PageObject.navigateTo("https://hotline.ua/");
-      //  WebElement alert = DriverManager.driver.findElement(By.xpath("/html/body/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1]"));
-        //alert.click();
+
         MainPage mainPage = new MainPage();
         ItemList itemList = new ItemList();
         PageOfProduct pageOfProduct = new PageOfProduct();
@@ -81,24 +62,13 @@ public class HotlineRun {
 
         DriverManager.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
-        //WebElement input = DriverManager.driver.findElement(By.xpath("//*[@id=\"searchbox\"]"));
-        //input.click();
-        //input.sendKeys("телевизор");
         mainPage.searchItemInTheSearchField();
-
-        //WebElement searchButton = DriverManager.driver.findElement(By.xpath("//*[@id=\"doSearch\"]"));
-        //searchButton.click();
 
         WebDriverWait wait = new WebDriverWait(DriverManager.driver, 5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class ,'price-md')]")));
 
-       // WebElement filter = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'sorting')]//select"));
-        //filter.click();
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]")));
 
-        //WebElement chooseByPrice = DriverManager.driver.findElement(By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]"));
-            //chooseByPrice.click();
         itemList.sortByPrice();
 
 
@@ -117,7 +87,20 @@ public class HotlineRun {
         DriverManager.killDriver();
 
     }
+    @Test
+    public void goggleSearch(){
+
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.get(PageObject.locator("https://www.google.com/"));
+        driver.findElement(By.name("q")).sendKeys("Максім Стовбчатий" + Keys.ENTER);
+
+
+
+
+    }
 
 }
+
 
 

@@ -15,6 +15,9 @@ public class PageObject {
         DriverManager.driver.findElement(By.xpath(path)).click();
 
     }
+    public static String locator(String locator){
+        return locator;
+    }
 
 
 }

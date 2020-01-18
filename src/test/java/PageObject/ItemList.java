@@ -11,7 +11,7 @@ public class ItemList {
     private By sortPrice = By.xpath("//select[contains(@class,'field')]/option[contains(@value,'1')]");
 
 
-    private PageOfProduct goToPageOfProduct(){
+    public PageOfProduct goToPageOfProduct(){
         WebElement product = DriverManager.getDriver().findElement(firstProductOflist);
         product.click();
         return new PageOfProduct();
